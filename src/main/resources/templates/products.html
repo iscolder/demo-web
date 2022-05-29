@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Cost</td>
+            <td>Info</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${products}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.cost}"></td>
+            <td>
+                <a th:href="@{'/products/'+${p.id}}" class="btn btn-primary">Detail</a>
+            </td>
+            <td>
+                <a th:href="@{'/products/'+${p.id} +'/edit'}" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{'/products/'+${p.id} + '/delete'}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <span th:text="${'Number of Products: ' + products.size()}"/>
+    <p></p>
+    <a th:href="@{'/products/new'}" type="button" class="btn btn-primary">Add Product</a>
+    <a th:href="@{'/'}" type="button" class="btn btn-primary">To Main</a>
+</div>
+</body>
+</html>
