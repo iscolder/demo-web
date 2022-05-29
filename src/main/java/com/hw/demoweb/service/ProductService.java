@@ -17,8 +17,8 @@ public class ProductService {
         return productRepository.getAllProducts();
     }
 
-    public Product save(Product product) {
-        return productRepository.save(product);
+    public void save(Product product) {
+        productRepository.save(product);
     }
 
     public Product getById(Long id) {
@@ -31,6 +31,14 @@ public class ProductService {
 
     public void delete(Long id) {
         productRepository.delete(id);
+    }
+
+    public void changeCost(Long id, boolean isIncrement) {
+        if (isIncrement) {
+            productRepository.incrementCost(id);
+        } else {
+            productRepository.decrementCost(id);
+        }
     }
 
 }

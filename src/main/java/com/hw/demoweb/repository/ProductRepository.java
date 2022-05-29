@@ -4,6 +4,8 @@ import com.hw.demoweb.model.Product;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -50,6 +52,28 @@ public class ProductRepository {
             Product product = productOpt.get();
             product.setTitle(newProduct.getTitle());
             product.setCost(newProduct.getCost());
+        }
+    }
+
+    public synchronized void incrementCost(Long id) {
+        Optional<Product> productOpt = getProductById(id);
+        if (productOpt.isPresent()) {
+            Product product = productOpt.get();
+            BigDecimal cost = BigDecimal.valueOf(product.getCost());
+            cost = cost.setScale(2, RoundingMode.HALF_UP);
+            cost = cost.add(new BigDecimal(1));
+            product.setCost(cost.doubleValue());
+        }
+    }
+
+    public synchronized void decrementCost(Long id) {
+        Optional<Product> productOpt = getProductById(id);
+        if (productOpt.isPresent()) {
+            Product product = productOpt.get();
+            BigDecimal cost = BigDecimal.valueOf(product.getCost());
+            cost = cost.setScale(2, RoundingMode.HALF_UP);
+            cost = cost.subtract(new BigDecimal(1));
+            product.setCost(cost.doubleValue());
         }
     }
 

@@ -20,6 +20,8 @@
             <td>Info</td>
             <td>Edit</td>
             <td>Delete</td>
+            <td>Plus</td>
+            <td>Minus</td>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +37,12 @@
             </td>
             <td>
                 <a th:href="@{'/products/'+${p.id} + '/delete'}" class="btn btn-danger">Delete</a>
+            </td>
+            <td>
+                <a th:href="@{'/products/'+${p.id} + '/cost/increment'}" class="btn btn-success">+</a>
+            </td>
+            <td>
+                <a th:href="@{'/products/'+${p.id} + '/cost/decrement'}" class="btn btn-danger">-</a>
             </td>
         </tr>
         </tbody>
