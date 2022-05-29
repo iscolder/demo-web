@@ -41,6 +41,13 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    @GetMapping(value = "/products/{id}/cost/{operation}")
+    public String editProductCost(Model model, @PathVariable Long id, @PathVariable String operation) {
+        productService.changeCost(id, "increment".equals(operation));
+        model.addAttribute("products", productService.getAll());
+        return "redirect:/products";
+    }
+
     @GetMapping(value = "/products/{id}/delete")
     public String editProduct(Model model, @PathVariable Long id) {
         productService.delete(id);
